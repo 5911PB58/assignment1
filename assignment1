@@ -1,0 +1,461 @@
+Exercise 1
+public class MyClass {
+    // Node class represents a single node in the linked list
+    class Node {
+        Student data; // Student object
+        Node next; // Reference to the next node
+
+        public Node(Student student) {
+            data = student;
+            next = null;
+        }
+    }
+
+    // Student class represents a student object
+    class Student {
+        String name;
+        int id;
+        int grade;
+
+        public Student(String name, int id, int grade) {
+            this.name = name;
+            this.id = id;
+            this.grade = grade;
+        }
+    }
+
+    // LinkedList class represents the linked list data structure
+    class LinkedList {
+        Node head; // Reference to the first node in the linked list
+
+        // Method to add a student to the linked list
+        public void addStudent(Student student) {
+            Node newNode = new Node(student);
+            if (head == null) {
+                head = newNode;
+            } else {
+                Node current = head;
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = newNode;
+            }
+        }
+
+        // Method to display the student information in the linked list (forward order)
+        public void displayStudents() {
+            Node current = head;
+            while (current != null) {
+                Student student = current.data;
+                System.out.println("Name: " + student.name);
+                System.out.println("ID: " + student.id);
+                System.out.println("Grade: " + student.grade);
+                System.out.println("----------------------");
+                current = current.next;
+            }
+        }
+
+        // Method to display the student information in the linked list (backward order)
+        public void displayStudentsBackward() {
+            displayStudentsBackwardUtil(head);
+        }
+
+        private void displayStudentsBackwardUtil(Node node) {
+            if (node == null) {
+                return;
+            }
+
+            displayStudentsBackwardUtil(node.next);
+
+            Student student = node.data;
+            System.out.println("Name: " + student.name);
+            System.out.println("ID: " + student.id);
+            System.out.println("Grade: " + student.grade);
+            System.out.println("----------------------");
+        }
+    }
+
+    public static void main(String[] args) {
+        MyClass myClass = new MyClass();
+        LinkedList studentList = myClass.new LinkedList(); // Create a linked list
+
+        // Create student objects
+        Student student1 = myClass.new Student("jatt saab", 12675, 95);
+        Student student2 = myClass.new Student("majhail pb", 78890, 67);
+        Student student3 = myClass.new Student("farar gt", 56721, 89);
+
+        // Add students to the linked list
+        studentList.addStudent(student1);
+        studentList.addStudent(student2);
+        studentList.addStudent(student3);
+
+        // Display student information (forward order)
+        System.out.println("Forward Order:");
+        studentList.displayStudents();
+
+        // Display student information (backward order)
+        System.out.println("Backward Order:");
+        studentList.displayStudentsBackward();
+    }
+}
+
+
+Exercise 2
+
+import java.util.Stack;
+
+class Book {
+    String title;
+    String author;
+    String isbn;
+
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
+    // Getter methods for the properties (not necessary for the assignment, but useful)
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+}
+
+class BookStack {
+    private Stack<Book> stack;
+
+    public BookStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(Book book) {
+        stack.push(book);
+    }
+
+    public Book pop() {
+        return stack.pop();
+    }
+
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+
+    public int size() {
+        return stack.size();
+    }
+
+    public Book peek() {
+        return stack.peek();
+    }
+
+    // Method to walk over the stack and report on the titles of each book
+    public void reportTitles() {
+        System.out.println("Books in the stack:");
+        for (Book book : stack) {
+            System.out.println(book.getTitle());
+            System.out.println(book.getAuthor());
+            System.out.println(book.getIsbn());
+        }
+    }
+}
+
+public class Main1 {
+    public static void main(String[] args) {
+        BookStack bookStack = new BookStack();
+
+        // Pushing 10 books to the stack
+        bookStack.push(new Book("jatt 1", "jattdaputt 1", "ISBN 1"));
+        bookStack.push(new Book("heer 2", "ranja 2", "ISBN 2"));
+        bookStack.push(new Book("shiv 3", "kumar 3", "ISBN 3"));
+        bookStack.push(new Book("teri 4", "kudidi 4", "ISBN 4"));
+        bookStack.push(new Book("padda 5", "saab 5", "ISBN 5"));
+        bookStack.push(new Book("jordan 6", "sandhu 6", "ISBN 6"));
+        bookStack.push(new Book("popat 7", "hogya 7", "ISBN 7"));
+        bookStack.push(new Book("rutta 8", "dirani 8", "ISBN 8"));
+        bookStack.push(new Book("satsri 9", "akal 9", "ISBN 9"));
+        bookStack.push(new Book("mai 10", "nhi 10", "ISBN 10"));
+
+        // Report on the titles of each book in the stack
+        bookStack.reportTitles();
+        System.out.println("Stack size: " + bookStack.size());
+
+
+
+        // Popping a book from the stack
+
+        Book poppedBook = bookStack.pop();
+
+        System.out.println("Popped book: " + poppedBook.title);
+
+        System.out.println("Stack size: " + bookStack.size());
+
+        // Checking if the stack is empty
+
+        System.out.println("Is stack empty? " + bookStack.isEmpty());
+
+
+
+        // Peeking at the top book
+
+        Book topBook = bookStack.peek();
+
+        System.out.println("Top book: " + topBook.title);
+
+        System.out.println("Is stack empty? " + bookStack.isEmpty());
+
+        System.out.println("Stack size: " + bookStack.size());
+
+        System.out.println("Popped book: " + poppedBook.title);
+
+    
+
+
+        
+    }
+}
+
+
+Exercise 3
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+class Athlete {
+    String name;
+    int age;
+    int runningDistanceEachDay;
+
+    public Athlete(String name, int age, int runningDistanceEachDay) {
+        this.name = name;
+        this.age = age;
+        this.runningDistanceEachDay = runningDistanceEachDay;
+    }
+}
+
+class QueueManager {
+    private Queue<Athlete> queue;
+
+    public QueueManager() {
+        queue = new LinkedList<>();
+    }
+
+    public void enqueue(Athlete athlete) {
+        queue.add(athlete);
+    }
+
+    public Athlete dequeue() {
+        return queue.poll();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+
+    public int size() {
+        return queue.size();
+    }
+
+    public Athlete peek() {
+        return queue.peek();
+    }
+
+    public void printQueueDetails() {
+        for (Athlete athlete : queue) {
+            System.out.println("Name: " + athlete.name);
+            System.out.println("Age: " + athlete.age);
+            System.out.println("Running Distance Each Day: " + athlete.runningDistanceEachDay);
+            System.out.println("-----------------------");
+        }
+    }
+}
+
+public class Main4 {
+    public static void main(String[] args) {
+        QueueManager athleteQueue = new QueueManager();
+
+        // Create 10 Athletes and enqueue them
+        Athlete athlete1 = new Athlete("jatt 1", 21, 15);
+        Athlete athlete2 = new Athlete("khush 2", 37, 18);
+        Athlete athlete3 = new Athlete("jagga 3", 23, 19);
+        Athlete athlete4 = new Athlete("akash 4", 11, 7);
+        Athlete athlete5 = new Athlete("simran 5", 24, 4);
+        Athlete athlete6 = new Athlete("abhi 6", 13, 31);
+        Athlete athlete7 = new Athlete("arpan 7", 37, 13);
+        Athlete athlete8 = new Athlete("shyam 8", 20, 6);
+        Athlete athlete9 = new Athlete("arsh 9", 31, 4);
+        Athlete athlete10 = new Athlete("sukh 10", 22, 11);
+
+        athleteQueue.enqueue(athlete1);
+        athleteQueue.enqueue(athlete2);
+        athleteQueue.enqueue(athlete3);
+        athleteQueue.enqueue(athlete4);
+        athleteQueue.enqueue(athlete5);
+        athleteQueue.enqueue(athlete6);
+        athleteQueue.enqueue(athlete7);
+        athleteQueue.enqueue(athlete8);
+        athleteQueue.enqueue(athlete9);
+        athleteQueue.enqueue(athlete10);
+        athleteQueue.enqueue(athlete1);
+
+        // Iterate over the queue and print out the details of each Athlete
+        athleteQueue.printQueueDetails();
+
+        // Verify if the queue still contains the same Athletes
+        System.out.println("Is queue empty? " + athleteQueue.isEmpty());
+        
+          System.out.println("Queue size: " + athleteQueue.size());
+          
+          Athlete frontAthlete = athleteQueue.peek();
+
+        System.out.println("Front athlete: " + frontAthlete.name);
+         Athlete dequeuedAthlete2 = athleteQueue.dequeue();
+
+        System.out.println("Dequeued athlete: " + dequeuedAthlete2.name);
+    }
+}
+
+Exercise 4
+
+import java.util.LinkedList;
+
+class Student {
+    String name;
+    float grade;
+
+    public Student(String name, float grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getGrade() {
+        return grade;
+    }
+}
+
+public class Main3 {
+
+    public static void main(String[] args) {
+        LinkedList<Student> studentList = new LinkedList<>();
+
+        // Create three student objects
+        Student student1 = new Student("jagga", 90.5f);
+        Student student2 = new Student("manjot", 90.2f);
+        Student student3 = new Student("harleen", 72.6f);
+
+        // Add the students to the linked list
+        studentList.add(student1);
+        studentList.add(student2);
+        studentList.add(student3);
+
+        // Print all students
+        System.out.println("All students:");
+        printStudents(studentList);
+
+        float gradeThreshold = 80.0f;
+        LinkedList<Student> studentsAboveThreshold = retrieveStudents(studentList, gradeThreshold);
+
+        System.out.println("\nStudents with grades above " + gradeThreshold + ":");
+        for (Student student : studentsAboveThreshold) {
+            System.out.println("Name: " + student.getName() + ", Grade: " + student.getGrade());
+        }
+    }
+
+    public static void printStudents(LinkedList<Student> studentList) {
+        for (Student student : studentList) {
+            System.out.println("Name: " + student.getName() + ", Grade: " + student.getGrade());
+        }
+    }
+
+    public static LinkedList<Student> retrieveStudents(LinkedList<Student> studentList, float gradeThreshold) {
+        LinkedList<Student> studentsAboveThreshold = new LinkedList<>();
+
+        for (Student student : studentList) {
+            if (student.getGrade() > gradeThreshold) {
+                studentsAboveThreshold.add(student);
+            }
+        }
+
+        return studentsAboveThreshold;
+    }
+}
+
+Exercise 5
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
+
+public class RoundRobinScheduler {
+    private Stack<String> scheduleStack;
+    private Queue<String> datingQueue;
+    private Map<String, Integer> scheduleCountMap; // To track the number of times each lady friend is scheduled
+
+    public RoundRobinScheduler() {
+        scheduleStack = new Stack<>();
+        datingQueue = new LinkedList<>();
+        scheduleCountMap = new HashMap<>();
+    }
+
+    public void addLadyFriend(String ladyFriend) {
+        datingQueue.add(ladyFriend);
+        scheduleCountMap.put(ladyFriend, 0);
+    }
+
+    public void generateSchedule() {
+        int numLadyFriends = datingQueue.size();
+        int numDays = numLadyFriends * 2;  // Each lady friend gets two dates
+
+        for (int day = 1; day <= numDays; day++) {
+            String currentLadyFriend = datingQueue.poll();
+            scheduleStack.push(currentLadyFriend);
+
+            if (day % numLadyFriends == 0) {
+                while (!scheduleStack.isEmpty()) {
+                    String scheduledLadyFriend = scheduleStack.pop();
+                    System.out.println("Day " + day + ": jagga is dating " + scheduledLadyFriend);
+                    datingQueue.add(scheduledLadyFriend);
+                    scheduleCountMap.put(scheduledLadyFriend, scheduleCountMap.get(scheduledLadyFriend) + 1);
+                }
+            }
+        }
+    }
+
+    public void printScheduleCount() {
+        for (Map.Entry<String, Integer> entry : scheduleCountMap.entrySet()) {
+            String ladyFriend = entry.getKey();
+            int count = entry.getValue();
+            System.out.println(ladyFriend + " was scheduled " + count + " times.");
+        }
+    }
+
+    public static void main(String[] args) {
+        RoundRobinScheduler scheduler = new RoundRobinScheduler();
+
+        // Add lady friends to the scheduler
+        scheduler.addLadyFriend("Friend 2");
+        scheduler.addLadyFriend("Friend 4");
+        scheduler.addLadyFriend("Friend 3");
+        scheduler.addLadyFriend("Friend 1");
+        scheduler.addLadyFriend("Friend 5");
+
+        // Generate and print the schedule
+        scheduler.generateSchedule();
+
+        // Print the schedule count for each lady friend
+        scheduler.printScheduleCount();
+    }
+}
